@@ -1,0 +1,47 @@
+type ProductsResponse {
+  limit: Int
+  products: [ProductsEntry]
+  skip: Int
+  total: Int
+}
+
+type ProductsEntry {
+  brand: String
+  category: String
+  description: String
+  discountPercentage: Float
+  id: Int
+  images: [String]
+  price: Int
+  rating: Float
+  stock: Int
+  thumbnail: String
+  title: String
+}
+
+type Query {
+  products(limit: Int!, skip: Int!): ProductsResponse
+    @rest(endpoint: "http://dummyjson.com/products?limit=$limit&skip=$skip")
+
+  searchProducts(search: String!, limit: Int!, skip: Int!): ProductsResponse
+    @rest(
+      endpoint: "https://dummyjson.com/products/search?q=$search&limit=$limit&skip=$skip"
+    )
+
+  productCategories: [String]
+    @rest(endpoint: "http://dummyjson.com/products/categories")
+
+  productCategory(
+    categoryName: String!
+    limit: Int!
+    skip: Int!
+  ): ProductsResponse
+    @rest(
+      endpoint: "https://dummyjson.com/products/category/$categoryName?limit=$limit&skip=$skip"
+    )
+
+  product(id: String!): ProductsEntry
+    @rest(
+      endpoint: "https://dummyjson.com/products/$id?limit=$limit&skip=$skip"
+    )
+}
