@@ -20,7 +20,7 @@ type ProductsEntry {
 }
 
 type Query {
-  products(limit: Int!, skip: Int!): ProductsResponse
+  listProducts(limit: Int!, skip: Int!): ProductsResponse
     @rest(endpoint: "http://dummyjson.com/products?limit=$limit&skip=$skip")
 
   searchProducts(search: String!, limit: Int!, skip: Int!): ProductsResponse
@@ -28,10 +28,10 @@ type Query {
       endpoint: "https://dummyjson.com/products/search?q=$search&limit=$limit&skip=$skip"
     )
 
-  productCategories: [String]
+  listProductCategories: [String]
     @rest(endpoint: "http://dummyjson.com/products/categories")
 
-  productCategory(
+  listProductsByCategory(
     categoryName: String!
     limit: Int!
     skip: Int!
