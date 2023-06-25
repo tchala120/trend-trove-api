@@ -42,6 +42,6 @@ type Query {
 
   product(id: String!): ProductsEntry
     @rest(
-      endpoint: "https://dummyjson.com/products/$id?limit=$limit&skip=$skip"
+      endpoint: "https://dummyjson.com/products/$id"
     )
 }
